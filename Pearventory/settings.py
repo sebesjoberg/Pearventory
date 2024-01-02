@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "widget_tweaks",
     "Inventory.apps.InventoryConfig",
     "django.contrib.admin",
     "django.contrib.auth",

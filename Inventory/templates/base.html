@@ -1,18 +1,27 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta tags -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Your App{% endblock %}</title>
-    <!-- Link Bootstrap 5 CSS via CDN -->
+
+    <title>{% block title %}Pearventory{% endblock %}</title>
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
   </head>
   <body>
-    <div class="container">{% block content %} {% endblock %}</div>
-
-    <!-- Bootstrap 5 JS Bundle (Optional for some features) -->
+    <div class="container-fluid px-2 pr-2">
+      <div class="custom-max-width">{% block content %}{% endblock %}</div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
+  <style>
+    .custom-max-width {
+      max-width: 1000px; /* Adjust this value to your preferred max-width */
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
 </html>

@@ -1,6 +1,7 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.template import loader
 from django.db.models import F, Sum, Case, When, IntegerField
+from .forms import DeliveryForm
 
 # Create your views here.
 from .models import Delivery, Site, Storage, Product
@@ -71,6 +72,24 @@ def delivery(request):
 
 
 def adddelivery(request):
-    return HttpResponse(
-        "Hello, world. You're at the add delivery, here we should be able to add a new delivery"
-    )
+    # django form, choices are for each storage, which means user choooses from dropdownmenu
+    # both the palce and the product,
+    # then if it is IN or OUT delivery and lastly the amount
+    if request.method == "POST":
+        form = DeliveryForm(request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+            delivery = form.save(commit=False)
+            delivery.save()
+            print("here")
+            # Process the form data
+            # For example: save the form data to the database
+            # delivery = form.save(commit=False)
+            # delivery.save()
+
+            return redirect("index")
+    else:
+        form = DeliveryForm()
+    template = loader.get_template("inventory/add_delivery.html")
+    context = {"form": form}
+    return HttpResponse(template.render(context, request))

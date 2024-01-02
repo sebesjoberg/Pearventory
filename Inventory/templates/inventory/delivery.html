@@ -1,36 +1,37 @@
-{% extends 'base.html' %} {% block title %} Delivery Information {% endblock %}
+{% extends "base.html" %}
+{% block title %}
+  Deliveries
+{% endblock title %}
 {% block content %}
-<h1 class="mt-4 mb-4">Delivery Information</h1>
-
-{% for place, products in grouped_deliveries.items %}
-<div class="card mb-4">
-  <div class="card-header">
-    <h2 class="card-title">{{ place }}</h2>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      {% for product, data in products.items %}
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-header">
-            <h2 class="card-title">{{ product }} - {{data.balance}}</h2>
-          </div>
-          <div class="card-body" style="max-height: 250px; overflow-y: auto">
-            <ul class="list-group" style="list-style: none; padding-left: 0">
-              {% for delivery in data.deliveries %}
-              <li
-                class="mb-2 p-2"
-                style="background-color: {% if delivery.deliveryType == 'OUT' %}red{% elif delivery.deliveryType == 'IN' %}green{% endif %};"
-              >
-                Date: {{ delivery.date }} - Amount: {{ delivery.amount }}
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
+  <h1 class="mt-4 mb-4 text-center">Delivery Information</h1>
+  {% for place, products in grouped_deliveries.items %}
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="card-title">{{ place }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          {% for product, data in products.items %}
+            <div class="col-md-4">
+              <div class="card mb-4">
+                <div class="card-header">
+                  <h2 class="card-title">{{ product }} - {{ data.balance }}</h2>
+                </div>
+                <div class="card-body" style="max-height: 250px; overflow-y: auto">
+                  <ul class="list-group" style="list-style: none; padding-left: 0">
+                    {% for delivery in data.deliveries %}
+                      <li class="mb-2 p-2"
+                          style="background-color: {% if delivery.deliveryType == 'OUT' %}red{% elif delivery.deliveryType == 'IN' %}green{% endif %}">
+                        Date: {{ delivery.date }} - Amount: {{ delivery.amount }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
         </div>
       </div>
-      {% endfor %}
     </div>
-  </div>
-</div>
-{% endfor %} {% endblock %}
+  {% endfor %}
+{% endblock content %}

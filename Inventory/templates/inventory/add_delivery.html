@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}Add Delivery{% endblock %}
+{% block content %}
+  <h1 class="mt-4 mb-4 text-center">Add Delivery</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="id_site" class="form-label">Storage:</label>
+      {% render_field form.site class="form-control" %}
+    </div>
+    <div class="mb-3">
+      <label for="id_amount" class="form-label">Amount:</label>
+      {% render_field form.amount class="form-control" %}
+    </div>
+    <div class="mb-3">
+      <label for="id_deliveryType" class="form-label">Delivery Type:</label>
+      {% render_field form.deliveryType class="form-select" %}
+    </div>
+    <div class="mb-3">
+      <label for="id_date" class="form-label">Date:</label>
+      <input type="text" class="form-control" id="datepicker" name="date" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {% if form.errors %}
+    <div class="alert alert-danger">
+      <strong>Error:</strong>
+      {% for field in form %}
+        {% for error in field.errors %}<p>{{ error }}{{ field.label }}</p>{% endfor %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        rel="stylesheet" />
+  <script>
+  $(document).ready(function () {
+    $("#datepicker").datepicker({
+      format: "yyyy-mm-dd",
+      autoclose: true,
+      todayHighlight: true,
+    });
+  });
+  </script>
+{% endblock %}
