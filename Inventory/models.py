@@ -1,13 +1,6 @@
 from django.db import models
 from datetime import date
 
-# Create your models here.
-# vi har sites(platser), produkter
-# sen har vi lagerplats, en lagerplats har en site,
-# en produkttyp och ett antal
-# vi kan också ha leveranser som då har en lagerplats
-# typ(in/ut) och antal
-
 
 class Delivery(models.Model):
     TYPE_CHOICES = {
