@@ -7,7 +7,7 @@
     {% csrf_token %}
     <div class="mb-3">
       <label for="id_site" class="form-label">Storage:</label>
-      {% render_field form.site class="form-control" %}
+      {% render_field form.site class="form-control searchable" %}
     </div>
     <div class="mb-3">
       <label for="id_amount" class="form-label">Amount:</label>
@@ -31,10 +31,6 @@
       {% endfor %}
     </div>
   {% endif %}
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
-        rel="stylesheet" />
   <script>
   $(document).ready(function () {
     $("#datepicker").datepicker({
@@ -42,6 +38,14 @@
       autoclose: true,
       todayHighlight: true,
     });
+    
   });
+  $(".searchable").select2({
+     width: '100%',
+     theme: 'bootstrap-5'
+        
+        
+      });
+    
   </script>
 {% endblock %}

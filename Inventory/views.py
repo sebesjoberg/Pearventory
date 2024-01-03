@@ -72,20 +72,12 @@ def delivery(request):
 
 
 def adddelivery(request):
-    # django form, choices are for each storage, which means user choooses from dropdownmenu
-    # both the palce and the product,
-    # then if it is IN or OUT delivery and lastly the amount
     if request.method == "POST":
         form = DeliveryForm(request.POST)
         print(form.is_valid())
         if form.is_valid():
             delivery = form.save(commit=False)
             delivery.save()
-            print("here")
-            # Process the form data
-            # For example: save the form data to the database
-            # delivery = form.save(commit=False)
-            # delivery.save()
 
             return redirect("index")
     else:

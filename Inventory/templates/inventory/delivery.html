@@ -7,22 +7,27 @@
   {% for place, products in grouped_deliveries.items %}
     <div class="card mb-4">
       <div class="card-header">
-        <h2 class="card-title">{{ place }}</h2>
+        <h2 class="card-title text-center">{{ place }}</h2>
       </div>
       <div class="card-body">
         <div class="row">
           {% for product, data in products.items %}
+            {% if forloop.counter0|divisibleby:3 %}
+            </div>
+            <div class="row mt-4">
+            {% endif %}
             <div class="col-md-4">
               <div class="card mb-4">
                 <div class="card-header">
-                  <h2 class="card-title">{{ product }} - {{ data.balance }}</h2>
+                  <h2 class="card-title text-center">{{ product }} - {{ data.balance }}</h2>
                 </div>
                 <div class="card-body" style="max-height: 250px; overflow-y: auto">
                   <ul class="list-group" style="list-style: none; padding-left: 0">
                     {% for delivery in data.deliveries %}
-                      <li class="mb-2 p-2"
-                          style="background-color: {% if delivery.deliveryType == 'OUT' %}red{% elif delivery.deliveryType == 'IN' %}green{% endif %}">
-                        Date: {{ delivery.date }} - Amount: {{ delivery.amount }}
+                      <li class="mb-2 p-2 d-flex align-items-center">
+                        <span class="col-auto circle {% if delivery.deliveryType == 'OUT' %}bg-danger{% elif delivery.deliveryType == 'IN' %}bg-success{% endif %}"></span>
+                        <span class="col d-flex align-items-center"><span class="w-100 text-center">{{ delivery.date|date:"Y-m-d" }}</span></span>
+                        <span class="col-auto badge bg-primary rounded-pill">{{ delivery.amount }}</span>
                       </li>
                     {% endfor %}
                   </ul>
@@ -34,4 +39,12 @@
       </div>
     </div>
   {% endfor %}
+  <style>
+.circle {
+width: 15px;
+height: 15px;
+border-radius: 50%;
+display: inline-block;
+}
+  </style>
 {% endblock content %}
