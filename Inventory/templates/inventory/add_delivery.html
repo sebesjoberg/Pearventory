@@ -1,6 +1,8 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load widget_tweaks %}
-{% block title %}Add Delivery{% endblock %}
+{% block title %}
+  Add Delivery
+{% endblock title %}
 {% block content %}
   <h1 class="mt-4 mb-4 text-center">Add Delivery</h1>
   <form method="post">
@@ -48,4 +50,4 @@
       });
     
   </script>
-{% endblock %}
+{% endblock content %}
