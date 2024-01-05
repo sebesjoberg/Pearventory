@@ -30,8 +30,10 @@
                     {% for delivery in data.deliveries %}
                       <li class="mb-2 p-2 d-flex align-items-center">
                         <span class="col-auto circle {% if delivery.deliveryType == 'OUT' %}bg-danger{% elif delivery.deliveryType == 'IN' %}bg-success{% endif %}"></span>
-                        <span class="col d-flex align-items-center"><span class="w-100 text-center">{{ delivery.date|date:"Y-m-d" }}</span></span>
-                        <span class="col-auto badge bg-primary rounded-pill">{{ delivery.amount }}</span>
+                        <span class="col d-flex align-items-center">
+                          <span class="w-100 text-center">{{ delivery.date|date:"Y-m-d" }}</span>
+                        </span>
+                        <span class="col-auto badge bg-primary rounded-pill" style="width: 85px;">{{ delivery.amount }}</span>
                       </li>
                     {% endfor %}
                   </ul>
