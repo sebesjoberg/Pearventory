@@ -26,12 +26,15 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
   {% if form.errors %}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger mt-2">
       <strong>Error:</strong>
       {% for field in form %}
         {% for error in field.errors %}<p>{{ error }}{{ field.label }}</p>{% endfor %}
       {% endfor %}
     </div>
+  {% endif %}
+  {% if messages %}
+    {% for message in messages %}<div class="alert alert-success mt-2" role="alert">{{ message }}</div>{% endfor %}
   {% endif %}
   <script>
   $(document).ready(function () {

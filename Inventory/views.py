@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.template import loader
 from django.db.models import F, Sum, Case, When, IntegerField
 from .forms import DeliveryForm
+from django.contrib import messages
 
 # Create your views here.
 from .models import Delivery, Site, Storage, Product
@@ -74,12 +75,12 @@ def delivery(request):
 def adddelivery(request):
     if request.method == "POST":
         form = DeliveryForm(request.POST)
-        print(form.is_valid())
+
         if form.is_valid():
             delivery = form.save(commit=False)
             delivery.save()
-
-            return redirect("index")
+            messages.success(request, "Delivery added successfully.")
+            return redirect("adddelivery")
     else:
         form = DeliveryForm()
     template = loader.get_template("inventory/add_delivery.html")

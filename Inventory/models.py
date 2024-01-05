@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from django.core.validators import MinValueValidator
 
 
 class Delivery(models.Model):
@@ -8,7 +9,7 @@ class Delivery(models.Model):
         "OUT": "Outdelivery",
     }
     site = models.ForeignKey("Storage", on_delete=models.CASCADE)
-    amount = models.IntegerField(default=0)
+    amount = models.IntegerField(default=0, validators=[MinValueValidator(1)])
     deliveryType = models.CharField(max_length=3, choices=TYPE_CHOICES)
     date = models.DateField(default=date.today)
 
